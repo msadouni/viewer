@@ -1,12 +1,14 @@
 @charset "utf-8";
 @import "susy";
+// reset to negate weird legend tag behavior
+@import "compass/reset";
 
 
 $total-columns: 1;
-$column-width: 150px;
-$gutter-width: 10px;
-$grid-padding: 10px;
-$container-style: static;
+// use ems
+$column-width: 10em;
+$gutter-width: 1em;
+$grid-padding: 1em;
 body{
   font-family: sans-serif;
   font-size:10pt;
@@ -14,19 +16,18 @@ body{
 }
 .wrapper{
   background-color:white;
-  padding:5px;
+  // don't set padding here everything is done by susy
 }
 
 img{
   background-color:black;
 
   opacity:0.8;
-  width:150px;
-  height:150px;
+  // don't hardcode image dimensions
 
 }
 legend{
-  height:150px;
+  // don't hardcode legend dimensions
 }
 
 .wrapper{
@@ -38,7 +39,8 @@ img, legend{
   @include span-columns(1 omega);
 }
 
-@include at-breakpoint(340px 2) {
+@include at-breakpoint(2) {
+  // as soon as there is room for 2 columns
   // on affiche l'image et sa légende côte à côte, sur deux colonnes;
 
 
@@ -61,8 +63,10 @@ img, legend{
 
 }
 
-@include at-breakpoint(700px) {
-  @include with-grid-settings(2,300px,10px) {
+@include at-breakpoint(4) {
+  // as soon as there is room for 4 columns
+  @include with-grid-settings(4,15em,2em) {
+    // use 4 15em columns with 2em gutters
     .wrapper{
 
       @include container;
@@ -70,11 +74,12 @@ img, legend{
 
     }
     img{
-
-      width:300px;
-      height:300px;
+      @include span-columns(2);
+      // half-size for images, no hardcoded dimensions
     }
     legend{
+      @include span-columns(2 omega);
+      // half-size for legends
       font-size:2em;
     }
   }
