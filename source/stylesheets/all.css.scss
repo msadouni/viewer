@@ -1,0 +1,82 @@
+@charset "utf-8";
+@import "susy";
+
+
+$total-columns: 1;
+$column-width: 150px;
+$gutter-width: 10px;
+$grid-padding: 10px;
+$container-style: static;
+body{
+  font-family: sans-serif;
+  font-size:10pt;
+  background-color: #334;
+}
+.wrapper{
+  background-color:white;
+  padding:5px;
+}
+
+img{
+  background-color:black;
+
+  opacity:0.8;
+  width:150px;
+  height:150px;
+
+}
+legend{
+  height:150px;
+}
+
+.wrapper{
+  @include container;
+  @include susy-grid-background;
+}
+img, legend{
+  // on revient à la ligne pour à chaque image et légende
+  @include span-columns(1 omega);
+}
+
+@include at-breakpoint(340px 2) {
+  // on affiche l'image et sa légende côte à côte, sur deux colonnes;
+
+
+  .wrapper{
+    @include container;
+    @include susy-grid-background;
+  }
+  
+  img{
+    // @include remove-omega; ne change rien
+    @include span-columns(1);
+  }
+  legend{
+    font-size:1.1em;
+    // on finit la ligne après la légende
+    @include span-columns(1 omega);
+  }
+
+
+
+}
+
+@include at-breakpoint(700px) {
+  @include with-grid-settings(2,300px,10px) {
+    .wrapper{
+
+      @include container;
+      @include susy-grid-background;
+
+    }
+    img{
+
+      width:300px;
+      height:300px;
+    }
+    legend{
+      font-size:2em;
+    }
+  }
+
+}
